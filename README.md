@@ -1,5 +1,5 @@
 # LitterLogic-Backend 
-## *SEI 9-19 Project 4 PE(V)N-Stack App*
+## *SEI 9-19 Project 4 ME(V)N-Stack App*
 
 ### Date: Dec 15, 2022
 
@@ -27,7 +27,7 @@ For older cats with kidney and digestive health issues, proactivity is of the es
 
 LitterLogic will feature MEVN(?) stack technologies.  The backend will focus on:
 
-- MongoDB for ingesting and storing JSON output from motion sensor > Hive MQ 
+- MongoDB for ingesting and storing User, Cat, and Trigger data (likely sourced from an SD card, Pre-MVP).   PostMVP solutions will aim to have mongodb backend ingest JSON output from arduino enabled PIR sensor > Hive MQ (cloud IOT solution).
 - Express/Node as the web framework/server by which front and back ends are connected
 
 
