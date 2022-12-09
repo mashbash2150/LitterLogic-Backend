@@ -12,7 +12,7 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       User.hasMany(models.Cat, {
         as: 'owner',
-        foreignKey: 'id'
+        foreignKey: 'owner_id'
       }) 
     }
   }

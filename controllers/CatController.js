@@ -15,7 +15,7 @@ const createCat = async (req, res) => {
   } 
 }
 
-const getCats=async(req,res)=>{
+const getOwnerCats=async(req,res)=>{
   try {
     let ownerId=parseInt(req.params.user_id)
     const cats = await Cat.findAll({where:{owner_id:ownerId}})
@@ -29,6 +29,6 @@ const getCats=async(req,res)=>{
 
 
 module.exports ={
-  getCats,
+  getOwnerCats,
   createCat
 }

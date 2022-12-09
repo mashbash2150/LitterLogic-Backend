@@ -12,7 +12,7 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       Cat.belongsTo(models.User, {
         as: 'owner',
-        foreignKey: 'owner_id'
+        foreignKey: 'id'
       })
       Cat.hasMany(models.Trigger,{
         as:'events',
