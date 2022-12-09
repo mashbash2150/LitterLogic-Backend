@@ -19,7 +19,7 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       healthConditions: {
-        type: Sequelize.ARRAY
+        type: Sequelize.ARRAY(Sequelize.STRING)
       },
       notes: {
         type: Sequelize.STRING

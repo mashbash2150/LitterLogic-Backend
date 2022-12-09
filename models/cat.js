@@ -32,7 +32,7 @@ module.exports = (sequelize, DataTypes) => {
     name: DataTypes.STRING,
     age: DataTypes.INTEGER,
     weight: DataTypes.INTEGER,
-    healthConditions: DataTypes.ARRAY,
+    healthConditions: DataTypes.ARRAY(DataTypes.STRING),
     notes: DataTypes.STRING
   }, {
     sequelize,
