@@ -19,7 +19,8 @@ module.exports = (sequelize, DataTypes) => {
   Trigger.init({
   
     enterTime: DataTypes.DATE,
-    exitTime: DataTypes.DATE
+    exitTime: DataTypes.DATE,
+    dailyTotal:DataTypes.INTEGER
   }, {
     sequelize,
     modelName: 'Trigger',
