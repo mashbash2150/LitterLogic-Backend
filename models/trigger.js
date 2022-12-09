@@ -1,15 +1,29 @@
-
-const mongoose = require('mongoose')
-const Schema = mongoose.Schema
-
-const Trigger = new Schema(
-    {
-        enterTime: { type: Date, required: true},
-        exitTime: { type: Date, required: true },
-        cat_id:{type:Schema.Types.ObjectId, ref:"cat_id"},
-
-    },
-    { timestamps: true },
-)
-
-module.exports = mongoose.model('Trigger', Trigger)
+'use strict';
+const {
+  Model
+} = require('sequelize');
+module.exports = (sequelize, DataTypes) => {
+  class Trigger extends Model {
+    /**
+     * Helper method for defining associations.
+     * This method is not a part of Sequelize lifecycle.
+     * The `models/index` file will call this method automatically.
+     */
+    static associate(models) {
+      Trigger.belongsTo(models.Cat, {
+        as: 'triggered',
+        foreignKey: 'cat_id'
+      })
+    }
+  }
+  Trigger.init({
+  
+    enterTime: DataTypes.DATE,
+    exitTime: DataTypes.DATE
+  }, {
+    sequelize,
+    modelName: 'Trigger',
+    tableName:'triggers'
+  });
+  return Trigger;
+};

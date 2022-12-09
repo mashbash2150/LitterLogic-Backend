@@ -1,19 +1,43 @@
-
-const mongoose = require('mongoose')
-const Schema = mongoose.Schema
-
-const Cat = new Schema(
-    {
-        name: { type: String, required: true},
-        age: { type: String, required: false},
-        vet: { type: String, required: false},
-        healthConditions: { type: Array, required: false },
-        weight: { type: Number, required: false },
-        //userId:{type:Schema.Types.ObjectId,ref:"userId "},
-        trigger_id:{type:Schema.Types.ObjectId,ref:"Trigger"}
-
+'use strict';
+const {
+  Model
+} = require('sequelize');
+module.exports = (sequelize, DataTypes) => {
+  class Cat extends Model {
+    /**
+     * Helper method for defining associations.
+     * This method is not a part of Sequelize lifecycle.
+     * The `models/index` file will call this method automatically.
+     */
+    static associate(models) {
+      Cat.belongsTo(models.User, {
+        as: 'owner',
+        foreignKey: 'owner_id'
+      })
+      Cat.hasMany(models.Trigger,{
+        as:'events',
+        foreignKey:'id'
+       })
+    }
+  }
+  Cat.init({
+    owner_id:{
+      type:DataTypes.INTEGER,
+      onDelete:'CASCADE',
+      references:{
+        model:'users',
+        key:'id'
+      }
     },
-    { timestamps: true },
-)
-
-module.exports = mongoose.model('Cat', Cat)
+    name: DataTypes.STRING,
+    age: DataTypes.INTEGER,
+    weight: DataTypes.INTEGER,
+    healthConditions: DataTypes.ARRAY,
+    notes: DataTypes.STRING
+  }, {
+    sequelize,
+    modelName: 'Cat',
+    tableName: 'cats'
+  });
+  return Cat;
+};
