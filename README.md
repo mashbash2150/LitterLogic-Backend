@@ -14,7 +14,7 @@
 
 LitterLogic is an app and IOT solution that aims to both bring humor into your life, and help you monitor your cat's health.  Armed with simple PIR sensors, a cat's visit to the LitterBox will trigger two things: the power on an obnoxious LED sign (available for customization - think: "Occupied", "Pooping", "On Air") and an entry on your cat's LitterLogic Database detailing the time and duration of their visit.    
 
-For older cats with kidney and digestive health issues, proactivity is of the essence, and LitterLogic arms you with data you need to discuss with your Vet how best to care for your furry loved ones. 
+For older cats with kidney and digestive health issues, proactivity is of the essence, and LitterLogic arms you with data you need to discuss with your Vet how best to care for your furry loved ones while providing you, the owner, with some much needed comic relief. 
 
 
 #### 
