@@ -20,8 +20,8 @@ module.exports = {
       name: {
         type: Sequelize.STRING
       },
-      age: {
-        type: Sequelize.INTEGER
+      birthday: {
+        type: Sequelize.DATEONLY
       },
       weight: {
         type: Sequelize.FLOAT

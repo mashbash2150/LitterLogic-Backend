@@ -30,7 +30,7 @@ module.exports = (sequelize, DataTypes) => {
       }
     },
     name: DataTypes.STRING,
-    age: DataTypes.INTEGER,
+    birthday: DataTypes.DATEONLY,
     weight: DataTypes.FLOAT,
     avgVisits: DataTypes.FLOAT,
     currentVisits: DataTypes.INTEGER,

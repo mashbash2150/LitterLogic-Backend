@@ -28,15 +28,7 @@ const getCatTriggers=async(req,res)=>{
     return res.status(500).send(error.message);
 }
 }
-// const getTriggerById=async(req,res)=>{
-//   try {
-//     const {id}=req.params;
-//     const trigger = await Trigger.findById(id)
-//     return res.status(200).json({ trigger })
-// } catch (error) {
-//     return res.status(500).send(error.message);
-// }
-// }
+
 
 module.exports={
   getCatTriggers,
