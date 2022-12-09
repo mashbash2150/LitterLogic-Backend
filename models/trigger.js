@@ -17,10 +17,16 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   Trigger.init({
-  
+    cat_id:{
+      type:DataTypes.INTEGER,
+      onDelete:'CASCADE',
+      references:{
+        model:'cats',
+        key:'id'
+      }
+    },
     enterTime: DataTypes.DATE,
     exitTime: DataTypes.DATE,
-    dailyTotal:DataTypes.INTEGER
   }, {
     sequelize,
     modelName: 'Trigger',

@@ -31,7 +31,9 @@ module.exports = (sequelize, DataTypes) => {
     },
     name: DataTypes.STRING,
     age: DataTypes.INTEGER,
-    weight: DataTypes.INTEGER,
+    weight: DataTypes.FLOAT,
+    avgVisits: DataTypes.FLOAT,
+    currentVisits: DataTypes.INTEGER,
     healthConditions: DataTypes.ARRAY(DataTypes.STRING),
     notes: DataTypes.STRING
   }, {

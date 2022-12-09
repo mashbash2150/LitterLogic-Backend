@@ -24,10 +24,16 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       weight: {
-        type: Sequelize.INTEGER
+        type: Sequelize.FLOAT
       },
       healthConditions: {
         type: Sequelize.ARRAY(Sequelize.STRING)
+      },
+      avgVisits: {
+        type: Sequelize.FLOAT
+      },
+      currentVisits: {
+        type: Sequelize.FLOAT
       },
       notes: {
         type: Sequelize.STRING

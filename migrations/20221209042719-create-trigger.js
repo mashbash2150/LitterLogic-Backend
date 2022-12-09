@@ -9,14 +9,20 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
+      cat_id: {
+        type: Sequelize.INTEGER,
+        onDelete: 'CASCADE',
+        references: {
+          model: 'cats',
+          key: 'id'
+        }
+      },
+
       enterTime: {
         type: Sequelize.DATE
       },
       exitTime: {
         type: Sequelize.DATE
-      },
-      dailyTotal: {
-        type: Sequelize.INTEGER
       },
       createdAt: {
         allowNull: false,
