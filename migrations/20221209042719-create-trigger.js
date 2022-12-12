@@ -17,12 +17,8 @@ module.exports = {
           key: 'id'
         }
       },
-
       action: {
         type: Sequelize.STRING
-      },
-      dateTime: {
-        type: Sequelize.DATE
       },
       createdAt: {
         allowNull: false,
