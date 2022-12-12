@@ -26,6 +26,8 @@ module.exports = (sequelize, DataTypes) => {
       }
     },
     action: DataTypes.STRING,
+    date: DataTypes.DATE,
+    time: DataTypes.TIME,
   }, {
     sequelize,
     modelName: 'Trigger',
