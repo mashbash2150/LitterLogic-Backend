@@ -18,10 +18,10 @@ module.exports = {
         }
       },
 
-      enterTime: {
-        type: Sequelize.DATE
+      action: {
+        type: Sequelize.STRING
       },
-      exitTime: {
+      dateTime: {
         type: Sequelize.DATE
       },
       createdAt: {
