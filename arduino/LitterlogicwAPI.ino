@@ -17,7 +17,8 @@ const char *password = "murderouskittens";
 
 WiFiServer server(80);
 
-int ledPin = 13;
+int redPin = 26;
+int greenPin = 13;
 int inputPin = 14;
 int pirState = LOW;
 int val = 0; // variable for reading the pin status
@@ -39,14 +40,52 @@ void setupDateTime()
   }
 }
 
+// void callApi(){
+
+//   if (WiFi.status()==WL_CONNECTED){
+
+//   HTTPClient http;
+//   String serverName = "https://litterlogic-backend.herokuapp.com/api/triggers/create/1";
+//   //http.begin(serverName);
+//   //String serverPath=serverName;
+//   //http.begin(serverPath.c_str());
+//   //http.addHeader("Content-Type", "application/json");
+//   //String httpRequestData = "{\"action\":\"apicall\",\"time\":\"2022-10-13\"}";
+//   int httpResponseCode=http.POST("{\"action\":\"apicall\",\"dateTime\":\"2022-10-13\"}");
+//   //Serial.print(httpResponseCode);
+//   //Serial.print(httpRequestData);
+//   Serial.print("httpResponseCode ");
+
+//   if (httpResponseCode>0){
+//     Serial.print("HTTP Response code: ");
+//     Serial.println(httpResponseCode);
+//     String payload=http.getString();
+//     Serial.println(payload);
+
+//   } else {
+//     Serial.print("Error code:  ");
+//     Serial.println(httpResponseCode);
+//     }
+//     http.end();
+// }
+
+// else {
+// Serial.println("wifi disconnected");
+// }
+
+//}
 void setup()
 {
   setupDateTime();
-  pinMode(ledPin, OUTPUT);  // declaring LED as output
-  pinMode(inputPin, INPUT); // declaring PIR as input
+  pinMode(redPin, OUTPUT);   // declare LED as output
+  pinMode(greenPin, OUTPUT); // declare LED as output
+  pinMode(inputPin, INPUT);  // declare sensor as input
 
   Serial.begin(115200);
   delay(10);
+
+  // next connect to wifi
+  //  We start by connecting to a WiFi network
 
   Serial.println();
   Serial.println();
@@ -58,6 +97,8 @@ void setup()
   while (WiFi.status() != WL_CONNECTED)
   {
     delay(2000);
+    //     Serial.print(".");
+    // }
 
     Serial.println("");
     Serial.println("WiFi connected.");
@@ -65,6 +106,7 @@ void setup()
     Serial.println(WiFi.localIP());
 
     server.begin();
+    // callApi();
   }
 
   int value = 0;
@@ -73,7 +115,7 @@ void setup()
 void loop()
 {
   HTTPClient http;
-  String serverName = "https://litterlogic-backend.herokuapp.com/api/triggers/create/2";
+  String serverName = "https://litterlogic-backend.herokuapp.com/api/triggers/create/3";
   http.begin(serverName);
   http.addHeader("Content-Type", "application/json");
   // int httpResponseCode=http.POST("{\"action\":\"apicall\",\"time\":\"2022-10-13\"}");
@@ -84,16 +126,19 @@ void loop()
   val = digitalRead(inputPin); // read input value
   if (val == HIGH)
   { // check if the input is HIGH
-    digitalWrite(ledPin, HIGH);
+    digitalWrite(redPin, HIGH);
+    digitalWrite(greenPin, LOW);
     delay(500); // turn LED ON
     if (pirState == LOW)
     {
       // we have just turned on
       StaticJsonBuffer<256> jb;
       // Add values in the document
-      //
-      root["cat_id"] = 2;
+      DateTimeParts p = DateTime.getParts();
+      root["cat_id"] = 3;
       root["action"] = "enter";
+      // root["date"]=(p.getYear(),
+      //         p.getMonth(), p.getMonthDay());
       root["date"] = DateTime.format(DateFormatter::DATE_ONLY);
       root["time"] = DateTime.format(DateFormatter::TIME_ONLY);
 
@@ -106,6 +151,8 @@ void loop()
       root["action"] = "enter";
       // root["time"]=DateTime.format(DateFormatter::SIMPLE).c_str();
 
+      // root["date"]=DateTime.format(DateFormatter::DATE_ONLY);
+
       root["date"] = DateTime.format(DateFormatter::DATE_ONLY);
       root["time"] = DateTime.format(DateFormatter::TIME_ONLY);
 
@@ -113,21 +160,25 @@ void loop()
       Serial.println();
 
       delay(3000);
-
+      // We only want to print on the output change, not state
       pirState = HIGH;
     }
   }
   else
   {
-    digitalWrite(ledPin, LOW); // turn LED OFF
+    digitalWrite(greenPin, HIGH); // turn green LED ON
+    digitalWrite(redPin, LOW);    // turnred LED OFF
     delay(500);
     if (pirState == HIGH)
     {
+
       StaticJsonBuffer<256> jb;
       // Add values in the document
-      //
-      root["cat_id"] = 2;
+      DateTimeParts p = DateTime.getParts();
+      root["cat_id"] = 3;
       root["action"] = "exit";
+      //  root["date"]=(p.getYear(),
+      //         p.getMonth(), p.getMonthDay());
       root["date"] = DateTime.format(DateFormatter::DATE_ONLY);
       root["time"] = DateTime.format(DateFormatter::TIME_ONLY);
 
@@ -136,10 +187,11 @@ void loop()
       int httpResponseCode = http.POST(requestBody);
       // int httpResponseCode=http.POST("{\"cat_id\":\"2\",\"action\":\"exit\"}");
       Serial.println("Motion ended, cat left and logged:");
-      DateTimeParts p = DateTime.getParts();
+      //  DateTimeParts p = DateTime.getParts();
       root["action"] = "exit";
 
-      root["date"] = DateTime.format(DateFormatter::DATE_ONLY);
+      root["date"] = (p.getYear(),
+                      p.getMonth(), p.getMonthDay());
       root["time"] = DateTime.format(DateFormatter::TIME_ONLY);
 
       // root["time"]=DateTime.format(DateFormatter::SIMPLE).c_str();

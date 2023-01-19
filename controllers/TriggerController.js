@@ -15,7 +15,15 @@ const createTrigger = async (req, res) => {
   } 
 }
 
-
+const getUserTriggers=async(req,res)=>{
+  try {
+    let userId=parseInt(req.params.user_id)
+    const triggers = await Trigger.findAll({where:{cat_id:catId}})
+    res.send(triggers)
+} catch (error) {
+    return res.status(500).send(error.message);
+}
+}
 
 
 
