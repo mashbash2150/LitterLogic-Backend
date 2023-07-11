@@ -1,5 +1,5 @@
 # LitterLogic-Backend 
-## *SEI 9-19 Project 4 PERN-Stack App*
+
 
 ### Date: Dec 15, 2022
 
@@ -28,14 +28,7 @@ For older cats with kidney and digestive health issues, proactivity is of the es
 
 #### 
 
-** NOTE: API calls are currently hard coded, not based on state, in order to facilitate a better demo experience. This way, a visitor can view existing cat/user/trigger data from the only sensor built. 
-
-LitterLogic will feature PERN stack technologies.  The backend will include:
-
-- Postgres for ingesting and storing User, &  Cat information, as well as Trigger data sent as JSON objects through API.   
-- Express/Node to enable web server by which front and back ends are connected
-
-
+** NOTE: API calls are currently hard coded, not based on state, in order to facilitate a better demo experience. This way, a visitor can view existing cat/user/trigger data from the prototype sensor.
 
 
 
@@ -74,8 +67,3 @@ TBD
 
 ---
 
-### **_Credits_**
-
-#### 
-
-#### Markdown Cheatsheet: [MarkdownGuide.org](https://www.markdownguide.org/cheat-sheet/)
